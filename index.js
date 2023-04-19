@@ -1,7 +1,8 @@
 const express = require('express');
 const path = require('path');
+const controllers = require('./controllers/handler');
 require('dotenv').config();
-const { getItems, createItem } = require('./controllers/handler');
+const db = require("./services/db_service");
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -17,8 +18,8 @@ app.get('/', (req, res) => {
   res.send('Hello, world!');
 });
 
-app.get('/items', getItems);
-app.post('/items', createItem);
+app.get('/items', controllers.getItems);
+app.post('/items', controllers.createItem);
 
 // Start server
 app.listen(port, () => {
